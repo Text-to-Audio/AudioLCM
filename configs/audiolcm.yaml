@@ -1,0 +1,129 @@
+model:
+  base_learning_rate: 3.0e-06
+  target: ldm.models.diffusion.lcm_audio.LCM_audio
+  params:
+    linear_start: 0.00085
+    linear_end: 0.012
+    num_timesteps_cond: 1
+    log_every_t: 200
+    timesteps: 1000
+    first_stage_key: image
+    cond_stage_key: caption
+    mel_dim: 20
+    mel_length: 312
+    channels: 0
+    cond_stage_trainable: False
+    conditioning_key: crossattn
+    monitor: val/loss_simple_ema
+    scale_by_std: true
+    use_lcm: True
+    num_ddim_timesteps: 50
+    w_min: 4
+    w_max: 12
+    ckpt_path: ../ckpt/maa2.ckpt
+    
+    use_ema: false
+    scheduler_config:
+      target: ldm.lr_scheduler.LambdaLinearScheduler
+      params:
+        warm_up_steps:
+        - 10000
+        cycle_lengths:
+        - 10000000000000
+        f_start:
+        - 1.0e-06
+        f_max:
+        - 1.0
+        f_min:
+        - 1.0
+    unet_config:
+      target: ldm.modules.diffusionmodules.concatDiT.ConcatDiT2MLP
+      params:
+        in_channels: 20
+        context_dim: 1024
+        hidden_size: 576
+        num_heads: 8
+        depth: 4
+        max_len: 1000
+    first_stage_config:
+      target: ldm.models.autoencoder1d.AutoencoderKL
+      params:
+        embed_dim: 20
+        monitor: val/rec_loss
+        ckpt_path: ../logs/trainae/ckpt/epoch=000032.ckpt
+        ddconfig:
+          double_z: true
+          in_channels: 80
+          out_ch: 80
+          z_channels: 20
+          kernel_size: 5
+          ch: 384
+          ch_mult:
+          - 1
+          - 2
+          - 4
+          num_res_blocks: 2
+          attn_layers:
+          - 3
+          down_layers:
+          - 0
+          dropout: 0.0
+        lossconfig:
+          target: torch.nn.Identity
+    cond_stage_config:
+      target: ldm.modules.encoders.modules.FrozenCLAPFLANEmbedder
+      params:
+        weights_path: ../useful_ckpts/CLAP/CLAP_weights_2022.pth
+
+lightning:
+  callbacks:
+    image_logger:
+      target: main.AudioLogger
+      params:
+        sample_rate: 16000
+        for_specs: true
+        increase_log_steps: false
+        batch_frequency: 5000
+        max_images: 8
+        melvmin: -5
+        melvmax: 1.5
+        vocoder_cfg:
+          target: vocoder.bigvgan.models.VocoderBigVGAN
+          params:
+            ckpt_vocoder: ../vocoder/logs/bigvnat16k93.5w
+  trainer:
+    benchmark: True
+    gradient_clip_val: 1.0
+    replace_sampler_ddp: false
+    max_epochs: 100
+  modelcheckpoint:
+    params:
+      monitor: epoch
+      mode: max
+      # every_n_train_steps: 2000
+      save_top_k: 100
+      every_n_epochs: 3
+
+      
+data:
+  target: main.SpectrogramDataModuleFromConfig
+  params:
+    batch_size: 8
+    num_workers: 32
+    spec_dir_path: 'ldm/data/tsv_dirs/full_data/caps_struct' 
+    mel_num: 80
+    train:
+      target: ldm.data.joinaudiodataset_struct_anylen.JoinSpecsTrain
+      params:
+        specs_dataset_cfg:
+    validation:
+      target: ldm.data.joinaudiodataset_struct_anylen.JoinSpecsValidation
+      params:
+        specs_dataset_cfg:
+        
+test_dataset:
+  target: ldm.data.tsvdataset.TSVDatasetStruct
+  params:
+    tsv_path: audiocaps_test_16000_struct.tsv
+    spec_crop_len: 624
+
