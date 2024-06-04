@@ -10,13 +10,13 @@ PyTorch Implementation of [AudioLCM]: a efficient and high-quality text-to-audio
 
 We provide our implementation and pretrained models as open source in this repository.
 
-Visit our [demo page](https://audiolcm.github.io/) for audio samples.
+Visit our [demo page](https://audiolcm.github.io/) for audio samples. 
 
 <!-- [Text-to-Audio HuggingFace Space](https://huggingface.co/spaces/AIGC-Audio/Make_An_Audio) | [Audio Inpainting HuggingFace Space](https://huggingface.co/spaces/AIGC-Audio/Make_An_Audio_inpaint) -->
 
 ## News
 <!-- - Jan, 2023: **[Make-An-Audio](https://arxiv.org/abs/2207.06389)** submitted to arxiv. -->
-- June, 2024: **[AudioLCM]** released in Github. 
+- June, 2024: **[AudioLCM]** released in Github. HuggingFace Space is coming!
 
 ## Quick Started
 We provide an example of how you can generate high-fidelity samples quickly using AudioLCM.
