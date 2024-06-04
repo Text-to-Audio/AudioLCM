@@ -24,32 +24,6 @@ We provide an example of how you can generate high-fidelity samples quickly usin
 To try on your own dataset, simply clone this repo in your local machine provided with NVIDIA GPU + CUDA cuDNN and follow the below instructions.
 
 
-### Support Datasets and Pretrained Models
-
-Simply run following command to download the weights from [Google drive](https://drive.google.com/drive/folders/1zZTI3-nHrUIywKFqwxlFO6PjB66JA8jI?usp=drive_link).
-Download bert-base-uncased weights from [Hugging Face](https://huggingface.co/google-bert/bert-base-uncased). Down load t5-v1_1-large weights from [Hugging Face](https://huggingface.co/google/t5-v1_1-large). Download CLAP weights from [Hugging Face](https://huggingface.co/microsoft/msclap/blob/main/CLAP_weights_2022.pth). 
-
-```
-Download:
-    audiolcm.ckpt and put it into ./ckpts  
-    BigVGAN vocoder and put it into ./vocoder/logs/bigvnat16k93.5w  
-    t5-v1_1-large and put it into ./ldm/modules/encoders/CLAP
-    bert-base-uncased and put it into ./ldm/modules/encoders/CLAP
-    CLAP_weights_2022.pth and put it into ./wav_evaluation/useful_ckpts/CLAP
-```
-<!-- The directory structure should be:
-```
-useful_ckpts/
-├── bigvgan
-│   ├── args.yml
-│   └── best_netG.pt
-├── CLAP
-│   ├── config.yml
-│   └── CLAP_weights_2022.pth
-└── maa1_full.ckpt
-``` -->
-
-
 ### Dependencies
 See requirements in `requirement.txt`:
 
