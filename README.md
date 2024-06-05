@@ -4,24 +4,50 @@
 
 PyTorch Implementation of [AudioLCM]: a efficient and high-quality text-to-audio generation with latent consistency model.
 
-<!-- [![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2301.12661)
-[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-blue)](https://huggingface.co/spaces/AIGC-Audio/Make_An_Audio)
-[![GitHub Stars](https://img.shields.io/github/stars/Text-to-Audio/Make-An-Audio?style=social)](https://github.com/Text-to-Audio/Make-An-Audio) -->
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2406.00356v1)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-blue)](https://huggingface.co/spaces/AIGC-Audio/AudioLCM)
+[![GitHub Stars](https://img.shields.io/github/stars/liuhuadai/AudioLCM?style=social)](https://github.com/liuhuadai/AudioLCM)
 
 We provide our implementation and pretrained models as open source in this repository.
 
-Visit our [demo page](https://audiolcm.github.io/) for audio samples. 
+Visit our [demo page](https://audiolcm.github.io/) for audio samples.
 
-<!-- [Text-to-Audio HuggingFace Space](https://huggingface.co/spaces/AIGC-Audio/Make_An_Audio) | [Audio Inpainting HuggingFace Space](https://huggingface.co/spaces/AIGC-Audio/Make_An_Audio_inpaint) -->
+[AudioLCM HuggingFace Space](https://huggingface.co/spaces/AIGC-Audio/AudioLCM) 
 
 ## News
 <!-- - Jan, 2023: **[Make-An-Audio](https://arxiv.org/abs/2207.06389)** submitted to arxiv. -->
-- June, 2024: **[AudioLCM]** released in Github. HuggingFace Space is coming!
+- June, 2024: **[AudioLCM]** released in Githu and HuggingFace. 
 
 ## Quick Started
 We provide an example of how you can generate high-fidelity samples quickly using AudioLCM.
 
 To try on your own dataset, simply clone this repo in your local machine provided with NVIDIA GPU + CUDA cuDNN and follow the below instructions.
+
+
+### Support Datasets and Pretrained Models
+
+Simply download the weights from [Huggingface](https://huggingface.co/liuhuadai/AudioLCM).
+<!-- Download bert-base-uncased weights from [Hugging Face](https://huggingface.co/google-bert/bert-base-uncased). Down load t5-v1_1-large weights from [Hugging Face](https://huggingface.co/google/t5-v1_1-large). Download CLAP weights from [Hugging Face](https://huggingface.co/microsoft/msclap/blob/main/CLAP_weights_2022.pth).  -->
+
+```
+Download:
+    audiolcm.ckpt and put it into ./ckpts  
+    BigVGAN vocoder and put it into ./vocoder/logs/bigvnat16k93.5w  
+    t5-v1_1-large and put it into ./ldm/modules/encoders/CLAP
+    bert-base-uncased and put it into ./ldm/modules/encoders/CLAP
+    CLAP_weights_2022.pth and put it into ./wav_evaluation/useful_ckpts/CLAP
+```
+<!-- The directory structure should be:
+```
+useful_ckpts/
+├── bigvgan
+│   ├── args.yml
+│   └── best_netG.pt
+├── CLAP
+│   ├── config.yml
+│   └── CLAP_weights_2022.pth
+└── maa1_full.ckpt
+``` -->
 
 
 ### Dependencies
@@ -86,16 +112,18 @@ This implementation uses parts of the code from the following Github repos:
 [Stable Diffusion](https://github.com/CompVis/stable-diffusion),
 as described in our code.
 
-<!-- ## Citations ##
+## Citations ##
 If you find this code useful in your research, please consider citing:
 ```bibtex
-@article{huang2023make,
-  title={Make-an-audio: Text-to-audio generation with prompt-enhanced diffusion models},
-  author={Huang, Rongjie and Huang, Jiawei and Yang, Dongchao and Ren, Yi and Liu, Luping and Li, Mingze and Ye, Zhenhui and Liu, Jinglin and Yin, Xiang and Zhao, Zhou},
-  journal={arXiv preprint arXiv:2301.12661},
-  year={2023}
+@misc{liu2024audiolcm,
+      title={AudioLCM: Text-to-Audio Generation with Latent Consistency Models}, 
+      author={Huadai Liu and Rongjie Huang and Yang Liu and Hengyuan Cao and Jialei Wang and Xize Cheng and Siqi Zheng and Zhou Zhao},
+      year={2024},
+      eprint={2406.00356},
+      archivePrefix={arXiv},
+      primaryClass={eess.AS}
 }
-``` -->
+```
 
 # Disclaimer ##
 Any organization or individual is prohibited from using any technology mentioned in this paper to generate someone's speech without his/her consent, including but not limited to government leaders, political figures, and celebrities. If you do not comply with this item, you could be in violation of copyright laws.
