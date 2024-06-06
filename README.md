@@ -16,7 +16,7 @@ Visit our [demo page](https://audiolcm.github.io/) for audio samples.
 
 ## News
 <!-- - Jan, 2023: **[Make-An-Audio](https://arxiv.org/abs/2207.06389)** submitted to arxiv. -->
-- June, 2024: **[AudioLCM]** released in Githu and HuggingFace. 
+- June, 2024: **[AudioLCM]** released in Github and HuggingFace. 
 
 ## Quick Started
 We provide an example of how you can generate high-fidelity samples quickly using AudioLCM.
@@ -87,7 +87,7 @@ The training result will be save in ./logs/
 # Evaluation
 ## generate audiocaps samples
 ```bash
-python scripts/txt2audio_for_lcm.py  --ddim_steps 2 -b configs/audiolcm.yaml --sample_rate 16000 --vocoder-ckpt  vocoder/logs/bigvnat16k93.5w --outdir results --test-dataset audiocaps  -r ckpt/audiolcm.ckpt
+python pythonscripts/txt2audio_for_lcm.py  --ddim_steps 2 -b configs/audiolcm.yaml --sample_rate 16000 --vocoder-ckpt  vocoder/logs/bigvnat16k93.5w --outdir results --test-dataset audiocaps  -r ckpt/audiolcm.ckpt
 ```
 
 ## calculate FD,FAD,IS,KL
@@ -97,7 +97,7 @@ git clone git@github.com:haoheliu/audioldm_eval.git
 ```
 Then test with:
 ```bash
-python scripts/test.py --pred_wavsdir {the directory that saves the audios you generated} --gt_wavsdir {the directory that saves audiocaps test set waves}
+python audioldm_eval/test.py --pred_wavsdir {the directory that saves the audios you generated} --gt_wavsdir {the directory that saves audiocaps test set waves}
 ```
 ## calculate Clap_score
 ```bash
