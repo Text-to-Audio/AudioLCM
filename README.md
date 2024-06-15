@@ -37,7 +37,7 @@ See requirements in `requirement.txt`:
 
 ## Inference with pretrained model
 ```bash
-python scripts/txt2audio_for_lcm.py  --ddim_steps 2 -b configs/audiolcm.yaml --sample_rate 16000 --vocoder-ckpt  vocoder/logs/bigvnat16k93.5w --outdir results --test-dataset audiocaps  -r ckpt/audiolcm.ckpt
+python scripts/txt2audio_for_lcm.py  --ddim_steps 2 -b configs/echoaudio.yaml --sample_rate 16000 --vocoder-ckpt  vocoder/logs/bigvnat16k93.5w --outdir results --test-dataset audiocaps  -r ckpt/audiolcm.ckpt
 ```
 # Train
 ## dataset preparation
