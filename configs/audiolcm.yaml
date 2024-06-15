@@ -37,7 +37,7 @@ model:
         f_min:
         - 1.0
     unet_config:
-      target: ldm.modules.diffusionmodules.concatDiT.ConcatDiT2MLP
+      target: ldm.modules.diffusionmodules.flag_large_dit.TxtFlagLargeImprovedDiTV2
       params:
         in_channels: 20
         context_dim: 1024
