@@ -1,3 +1,5 @@
+# AudioLCM: Text-to-Audio Generation with Latent Consistency Models
+
 #### Huadai Liu, Rongjie Huang, Yang Liu, Hengyuan Cao, Jialei Wang, Xize Cheng, Siqi Zheng, Zhou Zhao
 
 PyTorch Implementation of [AudioLCM]: an efficient and high-quality text-to-audio generation with latent consistency model.
@@ -10,7 +12,44 @@ We provide our implementation and pretrained models as open-source in this repos
 
 Visit our [demo page](https://audiolcm.github.io/) for audio samples.
 
-	@@ -53,16 +53,17 @@ useful_ckpts/
+[AudioLCM HuggingFace Space](https://huggingface.co/spaces/AIGC-Audio/AudioLCM) 
+
+## News
+<!-- - Jan, 2023: **[Make-An-Audio](https://arxiv.org/abs/2207.06389)** submitted to arxiv. -->
+- June, 2024: **[AudioLCM]** released in Github and HuggingFace. 
+
+## Quick Started
+We provide an example of how you can generate high-fidelity samples quickly using AudioLCM.
+
+To try on your own dataset, simply clone this repo in your local machine provided with NVIDIA GPU + CUDA cuDNN and follow the below instructions.
+
+
+### Support Datasets and Pretrained Models
+
+Simply download the weights from [Huggingface](https://huggingface.co/liuhuadai/AudioLCM).
+<!-- Download bert-base-uncased weights from [Hugging Face](https://huggingface.co/google-bert/bert-base-uncased). Down load t5-v1_1-large weights from [Hugging Face](https://huggingface.co/google/t5-v1_1-large). Download CLAP weights from [Hugging Face](https://huggingface.co/microsoft/msclap/blob/main/CLAP_weights_2022.pth).  -->
+
+```
+Download:
+    audiolcm.ckpt and put it into ./ckpts  
+    BigVGAN vocoder and put it into ./vocoder/logs/bigvnat16k93.5w  
+    t5-v1_1-large and put it into ./ldm/modules/encoders/CLAP
+    bert-base-uncased and put it into ./ldm/modules/encoders/CLAP
+    CLAP_weights_2022.pth and put it into ./wav_evaluation/useful_ckpts/CLAP
+```
+<!-- The directory structure should be:
+```
+useful_ckpts/
+├── bigvgan
+│   ├── args.yml
+│   └── best_netG.pt
+├── CLAP
+│   ├── config.yml
+│   └── CLAP_weights_2022.pth
+└── maa1_full.ckpt
+``` -->
+
+
 ### Dependencies
 See requirements in `requirement.txt`:
 
@@ -28,7 +67,13 @@ Assume you have already got a tsv file to link each caption to its audio_path, w
 To get the melspec of audio, run the following command, which will save mels in ./processed
 ```bash
 python ldm/data/preprocess/mel_spec.py --tsv_path tmp.tsv
-	@@ -76,34 +77,16 @@ Assume we have processed several datasets, and save the .tsv files in data/*.tsv
+```
+Add the duration into the tsv file
+```bash
+python ldm/data/preprocess/add_duration.py
+```
+## Train variational autoencoder
+Assume we have processed several datasets, and save the .tsv files in data/*.tsv . Replace **data.params.spec_dir_path** with the **data**(the directory that contain tsvs) in the config file. Then we can train VAE with the following command. If you don't have 8 gpus in your machine, you can replace --gpus 0,1,...,gpu_nums
 ```bash
 python main.py --base configs/train/vae.yaml -t --gpus 0,1,2,3,4,5,6,7
 ```
@@ -42,3 +87,26 @@ python main.py --base configs/autoencoder1d.yaml -t  --gpus 0,1,2,3,4,5,6,7
 The training result will be saved in ./logs/
 ## Evaluation
 Please refer to [Make-An-Audio](https://github.com/Text-to-Audio/Make-An-Audio?tab=readme-ov-file#evaluation)
+
+## Acknowledgements
+This implementation uses parts of the code from the following Github repos:
+[Make-An-Audio](https://github.com/Text-to-Audio/Make-An-Audio)
+[CLAP](https://github.com/LAION-AI/CLAP),
+[Stable Diffusion](https://github.com/CompVis/stable-diffusion),
+as described in our code.
+
+## Citations ##
+If you find this code useful in your research, please consider citing:
+```bibtex
+@misc{liu2024audiolcm,
+      title={AudioLCM: Text-to-Audio Generation with Latent Consistency Models}, 
+      author={Huadai Liu and Rongjie Huang and Yang Liu and Hengyuan Cao and Jialei Wang and Xize Cheng and Siqi Zheng and Zhou Zhao},
+      year={2024},
+      eprint={2406.00356},
+      archivePrefix={arXiv},
+      primaryClass={eess.AS}
+}
+```
+
+# Disclaimer ##
+Any organization or individual is prohibited from using any technology mentioned in this paper to generate someone's speech without his/her consent, including but not limited to government leaders, political figures, and celebrities. If you do not comply with this item, you could be in violation of copyright laws.
