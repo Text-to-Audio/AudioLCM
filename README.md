@@ -6,7 +6,7 @@ PyTorch Implementation of [AudioLCM]: an efficient and high-quality text-to-audi
 
 [![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2406.00356v1)
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-blue)](https://huggingface.co/spaces/AIGC-Audio/AudioLCM)
-[![GitHub Stars](https://img.shields.io/github/stars/liuhuadai/AudioLCM?style=social)](https://github.com/liuhuadai/AudioLCM)
+[![GitHub Stars](https://img.shields.io/github/stars/Text-to-Audio/AudioLCM?style=social)](https://github.com/Text-to-Audio/AudioLCM)
 
 We provide our implementation and pretrained models as open-source in this repository.
 
