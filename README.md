@@ -2,7 +2,7 @@
 
 #### Huadai Liu, Rongjie Huang, Yang Liu, Hengyuan Cao, Jialei Wang, Xize Cheng, Siqi Zheng, Zhou Zhao
 
-PyTorch Implementation of [AudioLCM]: an efficient and high-quality text-to-audio generation with latent consistency model.
+PyTorch Implementation of **[AudioLCM (ACM-MM'24)]**: an efficient and high-quality text-to-audio generation with latent consistency model.
 
 [![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2406.00356v1)
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-blue)](https://huggingface.co/spaces/AIGC-Audio/AudioLCM)
@@ -15,8 +15,9 @@ Visit our [demo page](https://audiolcm.github.io/) for audio samples.
 [AudioLCM HuggingFace Space](https://huggingface.co/spaces/AIGC-Audio/AudioLCM) 
 
 ## News
-<!-- - Jan, 2023: **[Make-An-Audio](https://arxiv.org/abs/2207.06389)** submitted to arxiv. -->
-- June, 2024: **[AudioLCM]** released in Github and HuggingFace. 
+- May, 2024: **[AudioLCM]** released in Github and HuggingFace.
+- June, 2024: **[Make-An-Audio 3](https://github.com/Text-to-Audio/Make-An-Audio-3)** released in Github and HuggingFace.
+- July, 2024: **[AudioLCM]** accepted to ACM-MM'24. 
 
 ## Quick Started
 We provide an example of how you can generate high-fidelity samples quickly using AudioLCM.
