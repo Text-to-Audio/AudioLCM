@@ -15,9 +15,9 @@ Visit our [demo page](https://audiolcm.github.io/) for audio samples.
 [AudioLCM HuggingFace Space](https://huggingface.co/spaces/AIGC-Audio/AudioLCM) 
 
 ## News
-- May, 2024: **[AudioLCM]** released in Github and HuggingFace.
+- July, 2024: **[AudioLCM]** accepted by ACM-MM'24.
 - June, 2024: **[Make-An-Audio 3](https://github.com/Text-to-Audio/Make-An-Audio-3)** released in Github and HuggingFace.
-- July, 2024: **[AudioLCM]** accepted to ACM-MM'24. 
+- May, 2024: **[AudioLCM]** released in Github and HuggingFace.
 
 ## Quick Started
 We provide an example of how you can generate high-fidelity samples quickly using AudioLCM.
