@@ -634,32 +634,27 @@ class LCM_audio(DDPM):
         w = w.to(device=x_start.device, dtype=x_start.dtype)
         w_embedding = w_embedding.to(device=x_start.device, dtype=x_start.dtype)
 
-        # import ipdb
-        # ipdb.set_trace()
         model_output = self.apply_model(x_noisy, t, cond, self.unet, w_cond=w_embedding)
         pred_x_0 = self.predict_start_from_noise(x_noisy,t,model_output)
         model_pred = c_skip_start * x_noisy + c_out_start * pred_x_0
 
-        # 20.4.10. Use the ODE solver to predict the kth step in the augmented PF-ODE trajectory after
+        # Use the ODE solver to predict the kth step in the augmented PF-ODE trajectory after
         # noisy_latents with both the conditioning embedding c and unconditional embedding 0
         # Get teacher model prediction on noisy_latents and conditional embedding
         with torch.no_grad():
-            with torch.autocast("cuda"):
+            teacher_output = self.apply_model(x_noisy, t, cond, self.model)
+            teacher_pred_x0 = self.predict_start_from_noise(x_noisy,t,teacher_output)
+            uncond = self.get_learned_conditioning({'ori_caption': [""] * bsz,"struct_caption":[""] * bsz})
+            uncond_teacher_output = self.apply_model(x_noisy, t, uncond, self.model)
+            uncond_teacher_pred_x0 = self.predict_start_from_noise(x_noisy,t,uncond_teacher_output)
+            pred_x0 = teacher_pred_x0 + w * (teacher_pred_x0 - uncond_teacher_pred_x0)
+            pred_noise = teacher_output + w * (teacher_output - uncond_teacher_output)
 
-                teacher_output = self.apply_model(x_noisy, t, cond, self.model)
-                teacher_pred_x0 = self.predict_start_from_noise(x_noisy,t,teacher_output)
-                uncond = self.get_learned_conditioning({'ori_caption': [""] * bsz,"struct_caption":[""] * bsz})
-                uncond_teacher_output = self.apply_model(x_noisy, t, uncond, self.model)
-                uncond_teacher_pred_x0 = self.predict_start_from_noise(x_noisy,t,uncond_teacher_output)
-                pred_x0 = teacher_pred_x0 + w * (teacher_pred_x0 - uncond_teacher_pred_x0)
-                pred_noise = teacher_output + w * (teacher_output - uncond_teacher_output)
+            x_prev = self.solver.ddim_step(pred_x0, pred_noise, index)
 
-                x_prev = self.solver.ddim_step(pred_x0, pred_noise, index)
-
-        # 20.4.12. Get target LCM prediction on x_prev, w, c, t_n
+        #  Get target LCM prediction on x_prev, w, c, t_n
         with torch.no_grad():
-            with torch.autocast("cuda"):
-                target_noise_pred = self.apply_model(x_prev.float(), timesteps, cond, self.target_unet, w_cond=w_embedding)
+            target_noise_pred = self.apply_model(x_prev.float(), timesteps, cond, self.target_unet, w_cond=w_embedding)
             pred_x_0 = self.predict_start_from_noise(x_prev,timesteps,target_noise_pred)
             target = c_skip * x_prev + c_out * pred_x_0
 
