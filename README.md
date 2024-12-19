@@ -1,4 +1,4 @@
-# AudioLCM: Text-to-Audio Generation with Latent Consistency Models
+# [ACM-MM 2024]AudioLCM: Text-to-Audio Generation with Latent Consistency Models
 
 #### Huadai Liu, Rongjie Huang, Yang Liu, Hengyuan Cao, Jialei Wang, Xize Cheng, Siqi Zheng, Zhou Zhao
 
@@ -24,10 +24,38 @@ Visit our [demo page](https://audiolcm.github.io/) for audio samples.
 ## Quick Started
 We provide an example of how you can generate high-fidelity samples quickly using AudioLCM.
 
+Download the **AudioLCM** model and generate audio from a text prompt:
+
+```python
+from pythonscripts.InferAPI import AudioLCMInfer
+
+prompt="Constant rattling noise and sharp vibrations"
+config_path="./audiolcm.yaml"
+model_path="./audiolcm.ckpt"
+vocoder_path="./model/vocoder"
+audio_path = AudioLCMInfer(prompt, config_path=config_path, model_path=model_path, vocoder_path=vocoder_path)
+
+```
+
+Use the `AudioLCMBatchInfer` function to generate multiple audio samples for a batch of text prompts:
+
+```python
+from pythonscripts.InferAPI import AudioLCMBatchInfer
+
+prompts=[
+    "Constant rattling noise and sharp vibrations",
+    "A rocket flies by followed by a loud explosion and fire crackling as a truck engine runs idle",
+    "Humming and vibrating with a man and children speaking and laughing"
+        ]
+config_path="./audiolcm.yaml"
+model_path="./audiolcm.ckpt"
+vocoder_path="./model/vocoder"
+audio_path = AudioLCMBatchInfer(prompts, config_path=config_path, model_path=model_path, vocoder_path=vocoder_path)
+```
 To try on your own dataset, simply clone this repo in your local machine provided with NVIDIA GPU + CUDA cuDNN and follow the below instructions.
 
 
-### Support Datasets and Pretrained Models
+### Pretrained Models
 
 Simply download the weights from [Huggingface](https://huggingface.co/liuhuadai/AudioLCM).
 <!-- Download bert-base-uncased weights from [Hugging Face](https://huggingface.co/google-bert/bert-base-uncased). Down load t5-v1_1-large weights from [Hugging Face](https://huggingface.co/google/t5-v1_1-large). Download CLAP weights from [Hugging Face](https://huggingface.co/microsoft/msclap/blob/main/CLAP_weights_2022.pth).  -->
