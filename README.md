@@ -131,13 +131,20 @@ as described in our code.
 ## Citations ##
 If you find this code useful in your research, please consider citing:
 ```bibtex
-@misc{liu2024audiolcm,
-      title={AudioLCM: Text-to-Audio Generation with Latent Consistency Models}, 
-      author={Huadai Liu and Rongjie Huang and Yang Liu and Hengyuan Cao and Jialei Wang and Xize Cheng and Siqi Zheng and Zhou Zhao},
-      year={2024},
-      eprint={2406.00356},
-      archivePrefix={arXiv},
-      primaryClass={eess.AS}
+@inproceedings{10.1145/3664647.3681072,
+author = {Liu, Huadai and Huang, Rongjie and Liu, Yang and Cao, Hengyuan and Wang, Jialei and Cheng, Xize and Zheng, Siqi and Zhao, Zhou},
+title = {AudioLCM: Efficient and High-Quality Text-to-Audio Generation with Minimal Inference Steps},
+year = {2024},
+isbn = {9798400706868},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3664647.3681072},
+doi = {10.1145/3664647.3681072},
+pages = {7008–7017},
+numpages = {10},
+keywords = {consistency model, latent diffusion model, text-to-audio generation},
+location = {Melbourne VIC, Australia},
+series = {MM '24}
 }
 ```
 
