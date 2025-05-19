@@ -15,6 +15,8 @@ Visit our [demo page](https://audiolcm.github.io/) for audio samples.
 [AudioLCM HuggingFace Space](https://huggingface.co/spaces/AIGC-Audio/AudioLCM) 
 
 ## News
+- May, 2025: **[OmniAudio](https://github.com/liuhuadai/OmniAudio)** released and accepted by ICML 2025.
+- May, 2025: **[FlashAudio](https://arxiv.org/abs/2410.12266)** has been accepted by ACL 2025 Main Conference.
 - Oct, 2024: **[FlashAudio](https://arxiv.org/abs/2410.12266)** released.
 - Sept, 2024: **[Make-An-Audio 3 (Lumina-Next)](https://github.com/Text-to-Audio/Make-An-Audio-3)** accepted by NeurIPS'24.
 - July, 2024: **[AudioLCM](https://arxiv.org/abs/2406.00356v1)** accepted by ACM-MM'24.
