@@ -15,6 +15,7 @@ Visit our [demo page](https://audiolcm.github.io/) for audio samples.
 [AudioLCM HuggingFace Space](https://huggingface.co/spaces/AIGC-Audio/AudioLCM) 
 
 ## News
+- July, 2025: **[ThinkSound](https://github.com/liuhuadai/ThinkSound)** released for **Any2Audio Generation**.
 - May, 2025: **[OmniAudio](https://github.com/liuhuadai/OmniAudio)** released and accepted by ICML 2025.
 - May, 2025: **[FlashAudio](https://arxiv.org/abs/2410.12266)** has been accepted by ACL 2025 Main Conference.
 - Oct, 2024: **[FlashAudio](https://arxiv.org/abs/2410.12266)** released.
